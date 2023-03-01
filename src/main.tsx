@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import RootLayout from "./RootLayout";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { NotFound } from "./pages/Not-found";
+import RootLayout from "./pages/RootLayout";
+import "./main.scss";
 
 const router = createBrowserRouter([
   {
