@@ -1,13 +1,13 @@
 import React from "react";
 
-function NotFound() {
+function About() {
   return (
-    <div className="not-found">
+    <div className="about">
       <div className="wrapper">
-        <h2>Not found</h2>
+        <h2>About Us</h2>
       </div>
     </div>
   );
 }
 
-export { NotFound };
+export default About;
