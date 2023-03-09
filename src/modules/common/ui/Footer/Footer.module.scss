@@ -1,0 +1,9 @@
+@import "src/scss/abstracts/mixins";
+
+.footer {
+  flex: 0 1 auto;
+
+  .wrapper {
+    @include wrapper
+  }
+}

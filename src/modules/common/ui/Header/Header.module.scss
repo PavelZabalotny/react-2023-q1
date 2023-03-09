@@ -1,0 +1,13 @@
+@import "src/scss/abstracts/mixins";
+
+.header {
+  flex: 0 1 auto;
+
+  .wrapper {
+    @include wrapper;
+    @include flex-column;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+  }
+}

@@ -1,0 +1,12 @@
+@import "variables";
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin wrapper {
+  max-width: $wrapper-width;
+  margin: 0 auto;
+  padding: 0 20px;
+}

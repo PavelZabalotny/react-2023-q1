@@ -1,11 +1,12 @@
 import React from "react";
+import styles from "./Header.module.scss";
 
 function Header() {
   return (
     <>
-      <div className="header">
-        <div className="wrapper">
-          <p>header</p>
+      <div className={styles.header}>
+        <div className={styles.wrapper}>
+          <span>header</span>
         </div>
       </div>
     </>

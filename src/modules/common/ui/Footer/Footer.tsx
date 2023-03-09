@@ -1,11 +1,12 @@
 import React from "react";
+import styles from "./Footer.module.scss";
 
 function Footer() {
   return (
     <>
-      <div className="footer">
-        <div className="wrapper">
-          <p>footer</p>
+      <div className={styles.footer}>
+        <div className={styles.wrapper}>
+          <span>footer</span>
         </div>
       </div>
     </>
