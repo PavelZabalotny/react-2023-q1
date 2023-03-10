@@ -2,12 +2,12 @@
 
 .header {
   flex: 0 1 auto;
+  padding: 1rem;
 
   .wrapper {
     @include wrapper;
     @include flex-column;
     align-items: center;
     justify-content: center;
-    height: 50px;
   }
 }
