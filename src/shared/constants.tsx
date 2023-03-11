@@ -3,3 +3,5 @@ export enum RoutePaths {
   About = "about",
   NoMatch = "*",
 }
+
+export const LOCALHOST_INPUT_VALUE = "sb_input";
