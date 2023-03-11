@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./Header.module.scss";
 import NavigationList from "../../components/NavigationList/NavigationList";
 import { ROUTER_CONFIG } from "../../../../shared/routerConfig";
+import SearchBar from "../../components/SearchBar/SearchBar";
 
 class Header extends Component {
   locationPath() {
@@ -21,8 +22,9 @@ class Header extends Component {
       <>
         <div className={styles.header}>
           <div className={styles.wrapper}>
-            <h2 className={styles.current_page}>{this.locationPath()}</h2>
+            <span className={styles.current_page}>{this.locationPath()}</span>
             <NavigationList links={ROUTER_CONFIG} callback={this.handleNavigationUpdate} />
+            <SearchBar />
           </div>
         </div>
       </>
