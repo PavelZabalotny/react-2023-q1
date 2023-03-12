@@ -9,17 +9,12 @@ interface IState {
 }
 
 class SearchBar extends Component<Record<string, never>, IState> {
-  state = { value: "" };
+  state = { value: getInputFromLocalStorage() };
 
   handleInput(e: FormEvent<HTMLInputElement>) {
     const target = e.target as HTMLInputElement;
     this.setState(() => ({ value: target.value }));
     setInputToLocalStorage(target.value);
-  }
-
-  componentDidMount() {
-    const value = getInputFromLocalStorage();
-    this.setState({ value });
   }
 
   render() {
