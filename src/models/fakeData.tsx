@@ -2,72 +2,75 @@ import { IFakeData } from "../types/fakeData.interface";
 
 export const fakeData: IFakeData[] = [
   {
-    title: "mattis aliquam faucibus",
+    id: "1",
+    title: "Mattis aliquam faucibus",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     image: "http://placeimg.com/320/240/any",
     price: "55",
   },
   {
-    title: "adipiscing commodo elit",
+    id: "2",
+    title: "Adipiscing commodo elit",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    image: "http://placeimg.com/320/240/any",
+    image: "http://placeimg.com/320/240/animals",
     price: "245",
   },
   {
-    title: "eget nunc lobortis",
+    id: "3",
+    title: "Eget nunc lobortis",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    image: "http://placeimg.com/320/240/any",
+    image: "http://placeimg.com/320/240/architecture",
     price: "167",
   },
   {
-    title: "faucibus pulvinar elementum",
-    description: "",
-    image: "http://placeimg.com/320/240/any",
+    id: "4",
+    title: "Faucibus pulvinar elementum",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    image: "http://placeimg.com/320/240/nature",
     price: "99",
   },
   {
-    title: "proin gravida hendrerit",
+    id: "5",
+    title: "Proin gravida hendrerit",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    image: "http://placeimg.com/320/240/any",
+    image: "http://placeimg.com/320/240/people",
     price: "114",
   },
   {
-    title: "ut placerat orci",
+    id: "6",
+    title: "Ut placerat orci",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    image: "http://placeimg.com/320/240/any",
+    image: "http://placeimg.com/320/240/tech",
     price: "124",
   },
   {
-    title: "morbi blandit cursus",
+    id: "7",
+    title: "Morbi blandit cursus",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    image: "http://placeimg.com/320/240/any",
+    image: "http://placeimg.com/320/240/grayscale",
     price: "148",
   },
   {
-    title: "aliquet nec ullamcorper",
+    id: "8",
+    title: "Aliquet nec ullamcorper",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    image: "http://placeimg.com/320/240/any",
+    image: "http://placeimg.com/320/240/cepia",
     price: "368",
   },
   {
-    title: "suspendisse interdum consectetur",
+    id: "9",
+    title: "Suspendisse interdum consectetur",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    image: "http://placeimg.com/320/240/any",
+    image: "http://placeimg.com/320/240/animals",
     price: "254",
-  },
-  {
-    title: "gravida in fermentum",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    image: "http://placeimg.com/320/240/any",
-    price: "158",
   },
 ];
