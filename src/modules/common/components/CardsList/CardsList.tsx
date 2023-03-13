@@ -12,7 +12,7 @@ class CardsList extends Component<unknown, { cards: IFakeData[] }> {
   render() {
     const { cards } = this.state;
     return (
-      <ul className={styles.cards_list}>
+      <ul className={styles.cards_list} data-testid="CardList">
         {cards.map((card) => (
           <Card key={card.id} props={card} />
         ))}
