@@ -9,7 +9,7 @@ interface IProps {
 const Card: FC<IProps> = ({ props: { title, description, image, price } }) => {
   return (
     <li className={styles.card} data-testid="card">
-      <div>
+      <div className={styles.card__img}>
         <img src={image} alt={title} />
       </div>
       <h3>{title}</h3>
