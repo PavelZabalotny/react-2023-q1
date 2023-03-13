@@ -1,9 +1,7 @@
-import { LOCALHOST_INPUT_VALUE } from "../constants";
-
-export function getInputFromLocalStorage(): string {
-  return window.localStorage.getItem(LOCALHOST_INPUT_VALUE) ?? "";
+export function getInputFromLocalStorage(key: string): string | null {
+  return localStorage.getItem(key);
 }
 
-export function setInputToLocalStorage(value: string): void {
-  window.localStorage.setItem(LOCALHOST_INPUT_VALUE, value);
+export function setInputToLocalStorage(key: string, value: string): void {
+  localStorage.setItem(key, value);
 }

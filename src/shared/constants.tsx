@@ -4,4 +4,4 @@ export enum RoutePaths {
   NoMatch = "*",
 }
 
-export const LOCALHOST_INPUT_VALUE = "sb_input";
+export const LOCALHOST_INPUT_KEY = "sb_input";
