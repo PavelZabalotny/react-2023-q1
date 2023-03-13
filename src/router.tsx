@@ -14,7 +14,7 @@ export const router = createBrowserRouter([
     element: <Root />,
     children: [
       {
-        path: RoutePaths.Home,
+        path: "",
         element: <CardsList />,
       },
       {
