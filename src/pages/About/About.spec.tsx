@@ -5,6 +5,6 @@ import About from "./About";
 
 test("render About component", () => {
   render(<About />);
-  const aboutElement = screen.getByTestId("about");
-  expect(aboutElement).toBeDefined();
+  const aboutElement = screen.getByRole("heading", { level: 2 });
+  expect(aboutElement).toBeInTheDocument();
 });

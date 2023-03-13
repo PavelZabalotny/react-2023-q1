@@ -9,5 +9,5 @@ test("render Card component", () => {
   const cardProps: IFakeData = { id: "1", title, description: "", image: "", price: "" };
   render(<Card props={cardProps} />);
   const element = screen.getByRole("heading", { level: 3 });
-  expect(element).toBeDefined();
+  expect(element).toBeInTheDocument();
 });

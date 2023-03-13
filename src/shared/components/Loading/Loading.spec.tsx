@@ -5,6 +5,6 @@ import React from "react";
 
 test("render Loading component", () => {
   render(<Loading />);
-  const loadingElement = screen.getByTestId("loading");
-  expect(loadingElement).toBeDefined();
+  const element = screen.getByText(/loading/i);
+  expect(element).toBeInTheDocument();
 });

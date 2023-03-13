@@ -5,6 +5,6 @@ import React from "react";
 
 test("render CardList component", () => {
   render(<CardsList />);
-  const element = screen.getByTestId("CardList");
-  expect(element).toBeDefined();
+  const element = screen.getByRole("list");
+  expect(element).toBeInTheDocument();
 });

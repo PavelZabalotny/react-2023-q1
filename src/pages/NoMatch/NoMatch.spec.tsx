@@ -5,6 +5,8 @@ import React from "react";
 
 test("render NoMatch component", () => {
   render(<NoMatch />);
-  const component = screen.getByTestId("noMatch");
-  expect(component).toBeDefined();
+  const component = screen.getByRole("heading", {
+    level: 2,
+  });
+  expect(component).toBeInTheDocument();
 });

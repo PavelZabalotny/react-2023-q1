@@ -1,19 +1,13 @@
 import React, { Component } from "react";
-import { IFakeData } from "../../../../types/fakeData.interface";
 import Card from "../Card/Card";
 import styles from "./CardsList.module.scss";
 import { fakeData } from "../../../../models/fakeData";
 
-class CardsList extends Component<unknown, { cards: IFakeData[] }> {
-  state = {
-    cards: fakeData,
-  };
-
+class CardsList extends Component {
   render() {
-    const { cards } = this.state;
     return (
-      <ul className={styles.cards_list} data-testid="CardList">
-        {cards.map((card) => (
+      <ul className={styles.cards_list}>
+        {fakeData.map((card) => (
           <Card key={card.id} props={card} />
         ))}
       </ul>
