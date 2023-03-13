@@ -8,7 +8,7 @@ interface IProps {
 
 const Card: FC<IProps> = ({ props: { title, description, image, price } }) => {
   return (
-    <li className={styles.card}>
+    <li className={styles.card} data-testid="card">
       <div>
         <img src={image} alt={title} />
       </div>
