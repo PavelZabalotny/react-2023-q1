@@ -1,11 +1,10 @@
 import { IRouterPath } from "@/types/routerPath.interface";
 
-export default function getPageTitle(config: IRouterPath[]) {
-  const { pathname } = window.location;
+export default function getPageTitle(routerConfig: IRouterPath[]) {
+  const { pathname } = location;
 
-  const keys = Object.keys(config);
-  if (keys.includes(pathname)) {
-    const foundElements = config.filter((item) => item.path === pathname);
+  if (routerConfig.some((route) => route.path.includes(pathname))) {
+    const foundElements = routerConfig.filter((route) => route.path === pathname);
     if (foundElements.length === 1) {
       const pageName = foundElements.shift()!;
       return pageName.title;
