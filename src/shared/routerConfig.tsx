@@ -6,7 +6,7 @@ export const ROUTER_CONFIG: IRouterPath[] = [
     title: "Home Page",
   },
   {
-    path: "about",
+    path: "/about",
     title: "About Page",
   },
 ];
