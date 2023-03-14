@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import Root from "./Root";
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { RoutePaths } from "../../shared/constants";
+import { RoutePaths } from "@/shared/constants";
 
 const router = createBrowserRouter([
   {

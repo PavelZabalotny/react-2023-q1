@@ -1,4 +1,4 @@
-import { IRouterPath } from "../../types/routerPath.interface";
+import { IRouterPath } from "@/types/routerPath.interface";
 
 export default function getPageTitle(config: IRouterPath[]) {
   const { pathname } = window.location;

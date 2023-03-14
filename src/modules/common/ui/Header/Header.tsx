@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import styles from "./Header.module.scss";
-import NavigationList from "../../components/NavigationList/NavigationList";
-import { ROUTER_CONFIG } from "../../../../shared/routerConfig";
-import SearchBar from "../../components/SearchBar/SearchBar";
-import getPageTitle from "../../../../shared/utils/getPageTitle";
+import NavigationList from "@/modules/common/components/NavigationList/NavigationList";
+import { ROUTER_CONFIG } from "@/shared/routerConfig";
+import SearchBar from "@/modules/common/components/SearchBar/SearchBar";
+import getPageTitle from "@/shared/utils/getPageTitle";
 
 class Header extends Component {
   handleNavigationUpdate() {

@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { IRouterPath } from "../../../../types/routerPath.interface";
+import { IRouterPath } from "@/types/routerPath.interface";
 import { Link } from "react-router-dom";
 import styles from "./NavigationList.module.scss";
 

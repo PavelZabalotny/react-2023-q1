@@ -1,9 +1,6 @@
 import React, { Component, FormEvent } from "react";
-import {
-  getInputFromLocalStorage,
-  setInputToLocalStorage,
-} from "../../../../shared/utils/localStorage";
-import { LOCALHOST_INPUT_KEY } from "../../../../shared/constants";
+import { getInputFromLocalStorage, setInputToLocalStorage } from "@/shared/utils/localStorage";
+import { LOCALHOST_INPUT_KEY } from "@/shared/constants";
 
 interface IState {
   value: string;

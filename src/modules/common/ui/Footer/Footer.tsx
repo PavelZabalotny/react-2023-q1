@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./Footer.module.scss";
-import github from "../../../../assets/icons/github.png";
-import rsschool from "../../../../assets/icons/rsschool.png";
-import { GITHUB_LINK, RSSCHOOL_LINK } from "../../../../shared/constants";
+import github from "@/assets/icons/github.png";
+import rsschool from "@/assets/icons/rsschool.png";
+import { GITHUB_LINK, RSSCHOOL_LINK } from "@/shared/constants";
 
 function Footer() {
   return (
