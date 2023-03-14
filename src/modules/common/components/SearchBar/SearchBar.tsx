@@ -37,7 +37,7 @@ class SearchBar extends Component<Record<string, never>, IState> {
       <div className={styles.search_bar}>
         <label htmlFor="search_bar">Search:</label>
         <input
-          name="search_bar"
+          id="search_bar"
           className={styles.search_input}
           value={this.state.value}
           placeholder="Type to search Cards..."
