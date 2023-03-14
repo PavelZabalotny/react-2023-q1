@@ -11,14 +11,12 @@ class Header extends Component {
 
   render() {
     return (
-      <>
-        <div className={styles.header}>
-          <div className={styles.wrapper}>
-            <span className={styles.current_page}>Current Page: {getPageTitle(ROUTER_CONFIG)}</span>
-            <NavigationList links={ROUTER_CONFIG} callback={this.handleNavigationUpdate} />
-          </div>
+      <header className={styles.header}>
+        <div className={styles.wrapper}>
+          <span className={styles.current_page}>Current Page: {getPageTitle(ROUTER_CONFIG)}</span>
+          <NavigationList links={ROUTER_CONFIG} callback={this.handleNavigationUpdate} />
         </div>
-      </>
+      </header>
     );
   }
 }
