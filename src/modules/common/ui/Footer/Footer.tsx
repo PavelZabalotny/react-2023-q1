@@ -6,7 +6,7 @@ import { GITHUB_LINK, RSSCHOOL_LINK } from "@/shared/constants";
 
 function Footer() {
   return (
-    <div className={styles.footer}>
+    <footer className={styles.footer}>
       <div className={styles.wrapper}>
         <div className={styles.github}>
           <a href={GITHUB_LINK} target="_blank" rel="noreferrer">
@@ -20,7 +20,7 @@ function Footer() {
           </a>
         </div>
       </div>
-    </div>
+    </footer>
   );
 }
 
