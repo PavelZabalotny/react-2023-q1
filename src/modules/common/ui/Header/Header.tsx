@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import styles from "./Header.module.scss";
 import NavigationList from "@/modules/common/components/NavigationList/NavigationList";
 import { ROUTER_CONFIG } from "@/shared/routerConfig";
-import SearchBar from "@/modules/common/components/SearchBar/SearchBar";
 import getPageTitle from "@/shared/utils/getPageTitle";
 
 class Header extends Component {
@@ -15,9 +14,8 @@ class Header extends Component {
       <>
         <div className={styles.header}>
           <div className={styles.wrapper}>
-            <span className={styles.current_page}>{getPageTitle(ROUTER_CONFIG)}</span>
+            <span className={styles.current_page}>Current Page: {getPageTitle(ROUTER_CONFIG)}</span>
             <NavigationList links={ROUTER_CONFIG} callback={this.handleNavigationUpdate} />
-            <SearchBar />
           </div>
         </div>
       </>
