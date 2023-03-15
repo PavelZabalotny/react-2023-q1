@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { IRouterPath } from "@/types/routerPath.interface";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styles from "./NavigationList.module.scss";
 
 interface IPropTypes {
@@ -13,9 +13,13 @@ const NavigationList: FC<IPropTypes> = ({ links, callback: updateHeaderPageTitle
     <ul className={styles.navigation_list}>
       {links.map((item) => (
         <li key={item.title}>
-          <Link to={item.path} onClick={updateHeaderPageTitle}>
+          <NavLink
+            to={item.path}
+            className={({ isActive }) => (isActive ? "active" : "")}
+            onClick={updateHeaderPageTitle}
+          >
             {item.title}
-          </Link>
+          </NavLink>
         </li>
       ))}
     </ul>
