@@ -10,19 +10,21 @@ interface IPropTypes {
 
 const NavigationList: FC<IPropTypes> = ({ links, callback: updateHeaderPageTitle }) => {
   return (
-    <ul className={styles.navigation_list}>
-      {links.map((item) => (
-        <li key={item.title}>
-          <NavLink
-            to={item.path}
-            className={({ isActive }) => (isActive ? "active" : "")}
-            onClick={updateHeaderPageTitle}
-          >
-            {item.title}
-          </NavLink>
-        </li>
-      ))}
-    </ul>
+    <nav>
+      <ul className={styles.navigation_list}>
+        {links.map((item) => (
+          <li key={item.title}>
+            <NavLink
+              to={item.path}
+              className={({ isActive }) => (isActive ? "active" : "")}
+              onClick={updateHeaderPageTitle}
+            >
+              {item.title}
+            </NavLink>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 };
 
