@@ -23,7 +23,7 @@
 
 ### `npm run test:coverage` - launches the tests (vitest) and show coverage.
 
-#### *Don't forget to install all the required dependencies:*
+#### _Don't forget to install all the required dependencies:_
 
 `npm install`
 
