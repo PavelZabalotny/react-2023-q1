@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Card from "../Card/Card";
+import Card from "./Card/Card";
 import styles from "./CardsList.module.scss";
-import { fakeData } from "@/models/fakeData";
+import { fakeData } from "@/data/fakeData";
 
 class CardsList extends Component {
   render() {

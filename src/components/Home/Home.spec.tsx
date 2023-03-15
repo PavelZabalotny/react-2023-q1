@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Home from "@/modules/common/ui/Home/Home";
+import Home from "@/components/Home/Home";
 import React from "react";
 import { expect } from "vitest";
 

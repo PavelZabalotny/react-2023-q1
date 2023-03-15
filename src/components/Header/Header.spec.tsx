@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 import { render, screen } from "@testing-library/react";
-import Header from "@/modules/common/ui/Header/Header";
+import Header from "@/components/Header/Header";
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./Header.module.scss";
-import NavigationList from "@/modules/common/components/NavigationList/NavigationList";
+import NavigationList from "@/components/Header/NavigationList/NavigationList";
 import { ROUTER_CONFIG } from "@/shared/routerConfig";
 import getPageTitle from "@/shared/utils/getPageTitle";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Header from "@/modules/common/ui/Header/Header";
-import Footer from "@/modules/common/ui/Footer/Footer";
+import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer/Footer";
 import styles from "./Root.module.scss";
 
 function Root() {

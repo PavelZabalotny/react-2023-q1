@@ -1,6 +1,6 @@
 import React from "react";
-import SearchBar from "@/modules/common/components/SearchBar/SearchBar";
-import CardsList from "@/modules/common/components/CardsList/CardsList";
+import SearchBar from "@/components/Home/SearchBar/SearchBar";
+import CardsList from "@/components/Home/CardsList/CardsList";
 import styles from "./Home.module.scss";
 
 function Home() {
