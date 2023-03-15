@@ -9,4 +9,8 @@ export const ROUTER_CONFIG: IRouterPath[] = [
     path: "/about",
     title: "About Page",
   },
+  {
+    path: "/forms",
+    title: "Forms Page",
+  },
 ];
