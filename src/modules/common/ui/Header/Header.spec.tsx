@@ -15,5 +15,4 @@ test("render Header component", () => {
   render(<RouterProvider router={router} />);
   const element = screen.getByRole("banner");
   expect(element).toBeInTheDocument();
-  screen.debug();
 });
