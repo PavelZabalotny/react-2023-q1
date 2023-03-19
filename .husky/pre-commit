@@ -1,0 +1,6 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npm run test
+npx prettier "**/*" --write --ignore-unknown --cache
+npx lint-staged

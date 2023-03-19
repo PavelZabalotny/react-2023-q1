@@ -1,0 +1,9 @@
+@import "src/scss/abstracts/mixins";
+
+.main {
+  flex: 1 1 auto;
+
+  .wrapper {
+    @include wrapper;
+  }
+}

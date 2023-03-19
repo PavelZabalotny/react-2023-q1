@@ -1,0 +1,31 @@
+@import "../../scss/abstracts/mixins";
+@import "../../scss/abstracts/variables";
+
+.footer {
+  flex: 0 1 auto;
+  background: $footer_color;
+  padding: 1rem;
+
+  .wrapper {
+    @include wrapper;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .github {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+    }
+
+    .year {
+      color: #ffffff;
+      font-size: 2rem;
+    }
+
+    .rsschool {
+      width: 100px;
+      filter: contrast(0.5);
+    }
+  }
+}
