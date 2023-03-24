@@ -8,6 +8,7 @@ import { TInputName } from "@/interfaces/inputName.type";
 import FormSelect from "@/components/Form/FormSelect/FormSelect";
 import { categories } from "@/data/mockCategories";
 import { selectValidation } from "@/shared/utils/validators/selectValidation";
+import { checkboxValidation } from "@/shared/utils/validators/checkboxValidation";
 
 interface IState {
   isFormValid: boolean;
@@ -19,6 +20,7 @@ class Form extends Component<PropsWithChildren, IState> {
   private textRef = React.createRef<HTMLInputElement>();
   private dateRef = React.createRef<HTMLInputElement>();
   private selectRef = React.createRef<HTMLSelectElement>();
+  private checkboxRef = React.createRef<HTMLInputElement>();
 
   state = {
     isFormValid: false,
@@ -26,6 +28,7 @@ class Form extends Component<PropsWithChildren, IState> {
       title: false,
       date: false,
       select: false,
+      checkbox: false,
     },
   };
 
@@ -58,6 +61,14 @@ class Form extends Component<PropsWithChildren, IState> {
           showError={hasError.select}
           errorMessage="Choose the category!"
         />
+        <FormInput
+          type="checkbox"
+          ref={this.checkboxRef}
+          id="checkbox"
+          label="Add Card to the Card list"
+          showError={hasError.checkbox}
+          errorMessage="Please confirm adding Card to the Card List!"
+        />
 
         <button type="submit">Submit</button>
       </form>
@@ -80,12 +91,16 @@ class Form extends Component<PropsWithChildren, IState> {
     const { current: textInput } = this.textRef;
     const { current: dateInput } = this.dateRef;
     const { current: select } = this.selectRef;
+    const { current: checkbox } = this.checkboxRef;
 
-    if (textInput && dateInput && select) {
+    if (textInput && dateInput && select && checkbox) {
       const isTitleValid = () => this.handleValidate("title", textInput.value, textValidation);
       const isDateValid = () => this.handleValidate("date", dateInput.value, dateValidation);
       const isSelectValid = () => this.handleValidate("select", select.value, selectValidation);
-      const arrayOfValidateFn = [isTitleValid, isDateValid, isSelectValid];
+      const isCheckboxValid = () =>
+        this.handleValidate("checkbox", checkbox?.checked.toString(), checkboxValidation);
+
+      const arrayOfValidateFn = [isTitleValid, isDateValid, isSelectValid, isCheckboxValid];
       const isFormValid = validateAllFields(arrayOfValidateFn);
       if (isFormValid) {
         console.log("form is valid");
@@ -93,6 +108,7 @@ class Form extends Component<PropsWithChildren, IState> {
           title: textInput.value,
           date: dateInput.value,
           select: select.value,
+          checkbox: checkbox?.checked.toString(),
         });
         this.formRef.current?.reset();
       }

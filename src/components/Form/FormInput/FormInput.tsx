@@ -4,7 +4,7 @@ import FormError from "@/components/Form/FormError/FormError";
 import { TInputName } from "@/interfaces/inputName.type";
 
 interface IProps {
-  type: "text" | "date";
+  type: "text" | "date" | "checkbox";
   ref: React.RefObject<HTMLInputElement>;
   id: TInputName;
   label: string;
