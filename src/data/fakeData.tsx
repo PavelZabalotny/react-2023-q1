@@ -1,4 +1,4 @@
-import { IFakeData } from "@/types/fakeData.interface";
+import { IFakeData } from "@/interfaces/fakeData.interface";
 
 export const fakeData: IFakeData[] = [
   {

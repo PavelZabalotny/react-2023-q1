@@ -1,11 +1,12 @@
 import React, { forwardRef } from "react";
 import styles from "./FormInput.module.scss";
 import FormError from "@/components/Form/FormError/FormError";
+import { TInputName } from "@/interfaces/inputName.type";
 
 interface IProps {
   type: "text" | "date";
   ref: React.RefObject<HTMLInputElement>;
-  id: string;
+  id: TInputName;
   label: string;
   showError: boolean | null;
   errorMessage: string;

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import styles from "./Card.module.scss";
-import { IFakeData } from "@/types/fakeData.interface";
+import { IFakeData } from "@/interfaces/fakeData.interface";
 
 interface IProps {
   props: IFakeData;

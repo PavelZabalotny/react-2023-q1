@@ -1,35 +1,14 @@
 import React, { Component, FormEvent, PropsWithChildren } from "react";
 import styles from "./Form.module.scss";
 import FormInput from "@/components/Form/FormInput/FormInput";
-
-type TArrayOfCallbacks = (() => boolean)[];
-
-type TInputName = "title" | "date";
+import { textValidation } from "@/shared/utils/validators/textValidation";
+import { dateValidation } from "@/shared/utils/validators/dateValidation";
+import { validateAllFields } from "@/shared/utils/validators/validateAllFields";
+import { TInputName } from "@/interfaces/inputName.type";
 
 interface IState {
   isFormValid: boolean;
   hasError: { [key in TInputName]?: boolean };
-}
-
-function titleValidation(value: string): boolean {
-  const clearTitle = value.trim();
-  return clearTitle.length > 0 && clearTitle[0] === clearTitle[0].toUpperCase();
-}
-
-function dateValidation(value: string): boolean {
-  return !isNaN(new Date(value).getTime());
-}
-
-function validateAllFields(arrayOfValidateFn: TArrayOfCallbacks): boolean {
-  let isAllValid = true;
-  arrayOfValidateFn.forEach((fn) => {
-    const isValid = fn();
-    if (!isValid) {
-      isAllValid = isValid;
-    }
-  });
-
-  return isAllValid;
 }
 
 class Form extends Component<PropsWithChildren, IState> {
@@ -56,7 +35,7 @@ class Form extends Component<PropsWithChildren, IState> {
           id="title"
           label="Title:"
           showError={hasError.title}
-          errorMessage="my error text my error text my error text my error text"
+          errorMessage="The title must contain at least one letter, and the first letter must be uppercase!"
         />
         <FormInput
           type="date"
@@ -64,7 +43,7 @@ class Form extends Component<PropsWithChildren, IState> {
           id="date"
           label="Date:"
           showError={hasError.date}
-          errorMessage="my error text my error text my error text my error text"
+          errorMessage="Please choose a valid date!"
         />
 
         <button type="submit">Submit</button>
@@ -89,7 +68,7 @@ class Form extends Component<PropsWithChildren, IState> {
     const { current: dateInput } = this.dateRef;
 
     if (textInput && dateInput) {
-      const isTitleValid = () => this.handleValidate("title", textInput.value, titleValidation);
+      const isTitleValid = () => this.handleValidate("title", textInput.value, textValidation);
       const isDateValid = () => this.handleValidate("date", dateInput.value, dateValidation);
       const arrayOfValidateFn = [isTitleValid, isDateValid];
       const isFormValid = validateAllFields(arrayOfValidateFn);
