@@ -14,7 +14,7 @@ class Header extends Component {
       <header className={styles.header}>
         <div className={styles.wrapper}>
           <span className={styles.current_page}>Current Page: {getPageTitle(ROUTER_CONFIG)}</span>
-          <NavigationList links={ROUTER_CONFIG} callback={this.handleNavigationUpdate} />
+          <NavigationList links={ROUTER_CONFIG} callback={this.handleNavigationUpdate.bind(this)} />
         </div>
       </header>
     );
