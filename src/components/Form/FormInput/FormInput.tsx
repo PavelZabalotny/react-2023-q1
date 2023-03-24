@@ -8,7 +8,7 @@ interface IProps {
   ref: React.RefObject<HTMLInputElement>;
   id: TInputName;
   label: string;
-  showError: boolean | null;
+  showError: boolean;
   errorMessage: string;
 }
 
