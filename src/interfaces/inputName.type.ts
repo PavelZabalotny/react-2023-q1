@@ -1,1 +1,1 @@
-export type TInputName = "title" | "date";
+export type TInputName = "title" | "date" | "select";
