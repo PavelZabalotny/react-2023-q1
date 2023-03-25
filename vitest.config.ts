@@ -14,7 +14,7 @@ export default mergeConfig(
         provider: "c8",
         all: true,
         reporter: "text",
-        exclude: ["*.config.*", "**/*.d.ts", "src/types/**"],
+        exclude: ["*.config.*", "**/*.d.ts", "src/interfaces/**"],
       },
     },
   })
