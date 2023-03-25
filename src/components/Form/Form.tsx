@@ -170,7 +170,10 @@ class Form extends Component<IProps, IState> {
           cardBorderColor: radio?.ref.current?.value as TCardBorderColor,
           img: userImage,
         };
-        this.props.onSubmit(cards);
+        const confirmSaveData = confirm("The data has been saved!");
+        if (confirmSaveData) {
+          this.props.onSubmit(cards);
+        }
         this.formRef.current?.reset();
       }
     }
