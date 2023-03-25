@@ -15,13 +15,9 @@ const FormSelect: React.ForwardRefExoticComponent<
   <label>
     {label}
     <select id={id} ref={ref}>
-      <option defaultValue="" hidden>
-        -- Please choose a category --
-      </option>
+      <option hidden></option>
       {categories.map((category) => (
-        <option key={category} value={category}>
-          {category}
-        </option>
+        <option key={category}>{category}</option>
       ))}
     </select>
     {showError && <FormError message={errorMessage} />}
