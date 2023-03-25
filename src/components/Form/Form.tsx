@@ -11,6 +11,8 @@ import { selectValidation } from "@/shared/utils/validators/selectValidation";
 import { checkboxValidation } from "@/shared/utils/validators/checkboxValidation";
 import FormRadio from "@/components/Form/FormRadio/FormRadio";
 import { radioValidation } from "@/shared/utils/validators/radioValidation";
+import { imageValidation } from "@/shared/utils/validators/imageValidation";
+import { createImage } from "@/shared/utils/createImage";
 
 interface IState {
   isFormValid: boolean;
@@ -23,6 +25,7 @@ class Form extends Component<PropsWithChildren, IState> {
   private dateRef = React.createRef<HTMLInputElement>();
   private selectRef = React.createRef<HTMLSelectElement>();
   private checkboxRef = React.createRef<HTMLInputElement>();
+  private imageRef = React.createRef<HTMLInputElement>();
   private radioConfig = [
     {
       ref: React.createRef<HTMLInputElement>(),
@@ -49,6 +52,7 @@ class Form extends Component<PropsWithChildren, IState> {
       select: false,
       checkbox: false,
       radio: false,
+      image: false,
     },
   };
 
@@ -95,6 +99,14 @@ class Form extends Component<PropsWithChildren, IState> {
           showError={hasError.radio}
           errorMessage="Choose a radio!"
         />
+        <FormInput
+          type="file"
+          ref={this.imageRef}
+          id="image"
+          label="Add image"
+          showError={hasError.image}
+          errorMessage="Choose image file"
+        />
 
         <button type="submit">Submit</button>
       </form>
@@ -118,9 +130,10 @@ class Form extends Component<PropsWithChildren, IState> {
     const { current: date } = this.dateRef;
     const { current: select } = this.selectRef;
     const { current: checkbox } = this.checkboxRef;
+    const { current: image } = this.imageRef;
     const [radio] = this.radioConfig.filter((radio) => radio.ref.current?.checked);
 
-    if (title && date && select && checkbox) {
+    if (title && date && select && checkbox && image) {
       const isTitleValid = () => this.handleValidate("title", title.value, textValidation);
       const isDateValid = () => this.handleValidate("date", date.value, dateValidation);
       const isSelectValid = () => this.handleValidate("select", select.value, selectValidation);
@@ -128,6 +141,8 @@ class Form extends Component<PropsWithChildren, IState> {
         this.handleValidate("checkbox", checkbox?.checked.toString(), checkboxValidation);
       const isRadioValid = () =>
         this.handleValidate("radio", radio?.ref.current?.value ?? "", radioValidation);
+      const isImageValid = () =>
+        this.handleValidate("image", image.files?.length.toString() as string, imageValidation);
 
       const arrayOfValidateFn = [
         isTitleValid,
@@ -135,15 +150,18 @@ class Form extends Component<PropsWithChildren, IState> {
         isSelectValid,
         isCheckboxValid,
         isRadioValid,
+        isImageValid,
       ];
       const isFormValid = validateAllFields(arrayOfValidateFn);
       if (isFormValid) {
+        const userImage = createImage(image);
         console.log({
           title: title.value,
           date: date.value,
           select: select.value,
           checkbox: checkbox?.checked.toString(),
           radio: radio?.ref.current?.value,
+          img: userImage,
         });
         this.formRef.current?.reset();
       }

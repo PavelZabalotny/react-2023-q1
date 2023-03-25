@@ -4,7 +4,7 @@ import FormError from "@/components/Form/FormError/FormError";
 import { TInputName } from "@/interfaces/inputName.type";
 
 interface IProps {
-  type: "text" | "date" | "checkbox";
+  type: "text" | "date" | "checkbox" | "file";
   id: TInputName;
   label: string;
   showError: boolean;
@@ -13,13 +13,17 @@ interface IProps {
 
 const FormInput: React.ForwardRefExoticComponent<
   React.PropsWithoutRef<IProps> & React.RefAttributes<HTMLInputElement>
-> = forwardRef(({ type, id, label, showError, errorMessage }, ref) => (
-  <div className={styles.container}>
-    <label>
-      {label} <input type={type} id={id} ref={ref} />
-    </label>
-    {showError && <FormError message={errorMessage} />}
-  </div>
-));
+> = forwardRef(({ type, id, label, showError, errorMessage }, ref) => {
+  const accept = type === "file" ? "image/*" : undefined;
+
+  return (
+    <div className={styles.container}>
+      <label>
+        {label} <input type={type} id={id} ref={ref} accept={accept} />
+      </label>
+      {showError && <FormError message={errorMessage} />}
+    </div>
+  );
+});
 
 export default FormInput;
