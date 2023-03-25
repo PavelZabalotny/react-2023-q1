@@ -13,7 +13,8 @@ import FormRadio from "@/components/Form/FormRadio/FormRadio";
 import { radioValidation } from "@/shared/utils/validators/radioValidation";
 import { imageValidation } from "@/shared/utils/validators/imageValidation";
 import { createImage } from "@/shared/utils/createImage";
-import { IFormCards, TCardBorderColor } from "@/pages/Forms/Forms";
+import { IFormCard, TCardBorderColor } from "@/pages/Forms/Forms";
+import uuid from "react-uuid";
 
 interface IState {
   isFormValid: boolean;
@@ -21,7 +22,7 @@ interface IState {
 }
 
 interface IProps {
-  onSubmit: (cards: IFormCards) => void;
+  onSubmit: (cards: IFormCard) => void;
 }
 
 class Form extends Component<IProps, IState> {
@@ -160,7 +161,8 @@ class Form extends Component<IProps, IState> {
       const isFormValid = validateAllFields(arrayOfValidateFn);
       if (isFormValid) {
         const userImage = createImage(image);
-        const cards: IFormCards = {
+        const cards: IFormCard = {
+          id: uuid(),
           title: title.value,
           date: date.value,
           category: select.value,

@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import Form from "@/components/Form/Form";
+import FormCardsList from "@/components/Form/FormCardsList/FormCardsList";
 
 export type TCardBorderColor = "red" | "black" | "blue";
 
-export interface IFormCards {
+export interface IFormCard {
+  id: string;
   title: string;
   date: string;
   category: string;
@@ -13,7 +15,7 @@ export interface IFormCards {
 }
 
 export interface IState {
-  cards: IFormCards[];
+  cards: IFormCard[];
 }
 
 class Forms extends Component<Record<string, never>, IState> {
@@ -24,14 +26,13 @@ class Forms extends Component<Record<string, never>, IState> {
   render() {
     return (
       <>
-        <Form onSubmit={(cards: IFormCards) => this.handleFormSubmit(cards)} />
-        <h3>Form Card List</h3>
+        <Form onSubmit={(cards: IFormCard) => this.handleFormSubmit(cards)} />
+        <FormCardsList cards={this.state.cards} />
       </>
     );
   }
 
-  private handleFormSubmit(card: IFormCards) {
-    console.log("card:", card);
+  private handleFormSubmit(card: IFormCard) {
     this.setState((prevState) => ({ cards: [...prevState.cards, card] }));
   }
 }
