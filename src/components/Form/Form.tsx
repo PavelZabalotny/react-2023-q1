@@ -81,7 +81,7 @@ class Form extends Component<IProps, IState> {
           id="date"
           label="Date:"
           showError={hasError.date}
-          errorMessage="Please choose a valid date!"
+          errorMessage="Please choose the date!"
         />
         <FormSelect
           ref={this.selectRef}
@@ -103,7 +103,7 @@ class Form extends Component<IProps, IState> {
           config={this.radioConfig}
           name="radio"
           showError={hasError.radio}
-          errorMessage="Choose a radio!"
+          errorMessage="Select the border color!"
         />
         <FormInput
           type="file"
@@ -111,7 +111,7 @@ class Form extends Component<IProps, IState> {
           id="image"
           label="Add image"
           showError={hasError.image}
-          errorMessage="Choose image file"
+          errorMessage="Select the image file!"
         />
 
         <button type="submit">Submit</button>
