@@ -1,4 +1,4 @@
-import React, { Component, FormEvent, PropsWithChildren } from "react";
+import React, { Component, FormEvent } from "react";
 import styles from "./Form.module.scss";
 import FormInput from "@/components/Form/FormInput/FormInput";
 import { textValidation } from "@/shared/utils/validators/textValidation";
@@ -13,13 +13,18 @@ import FormRadio from "@/components/Form/FormRadio/FormRadio";
 import { radioValidation } from "@/shared/utils/validators/radioValidation";
 import { imageValidation } from "@/shared/utils/validators/imageValidation";
 import { createImage } from "@/shared/utils/createImage";
+import { IFormCards, TCardBorderColor } from "@/pages/Forms/Forms";
 
 interface IState {
   isFormValid: boolean;
   hasError: { [key in TInputName]?: boolean };
 }
 
-class Form extends Component<PropsWithChildren, IState> {
+interface IProps {
+  onSubmit: (cards: IFormCards) => void;
+}
+
+class Form extends Component<IProps, IState> {
   private formRef = React.createRef<HTMLFormElement>();
   private textRef = React.createRef<HTMLInputElement>();
   private dateRef = React.createRef<HTMLInputElement>();
@@ -44,7 +49,7 @@ class Form extends Component<PropsWithChildren, IState> {
     },
   ];
 
-  state = {
+  public state = {
     isFormValid: false,
     hasError: {
       title: false,
@@ -155,14 +160,15 @@ class Form extends Component<PropsWithChildren, IState> {
       const isFormValid = validateAllFields(arrayOfValidateFn);
       if (isFormValid) {
         const userImage = createImage(image);
-        console.log({
+        const cards: IFormCards = {
           title: title.value,
           date: date.value,
-          select: select.value,
-          checkbox: checkbox?.checked.toString(),
-          radio: radio?.ref.current?.value,
+          category: select.value,
+          isCardVisible: checkbox?.checked,
+          cardBorderColor: radio?.ref.current?.value as TCardBorderColor,
           img: userImage,
-        });
+        };
+        this.props.onSubmit(cards);
         this.formRef.current?.reset();
       }
     }
