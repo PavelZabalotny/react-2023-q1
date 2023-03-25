@@ -8,7 +8,7 @@ import { TInputName } from "@/interfaces/inputName.type";
 import FormSelect from "@/components/Form/FormSelect/FormSelect";
 import { categories } from "@/data/mockCategories";
 import { checkboxValidation } from "@/shared/utils/validators/checkboxValidation";
-import FormRadio from "@/components/Form/FormRadio/FormRadio";
+import FormRadio, { IRadioConfig } from "@/components/Form/FormRadio/FormRadio";
 import { radioAndSelectValidation } from "@/shared/utils/validators/radioAndSelectValidation";
 import { imageValidation } from "@/shared/utils/validators/imageValidation";
 import { createImage } from "@/shared/utils/createImage";
@@ -31,7 +31,7 @@ class Form extends Component<IProps, IState> {
   private selectRef = React.createRef<HTMLSelectElement>();
   private checkboxRef = React.createRef<HTMLInputElement>();
   private imageRef = React.createRef<HTMLInputElement>();
-  private radioConfig = [
+  private radioConfig: IRadioConfig[] = [
     {
       ref: React.createRef<HTMLInputElement>(),
       label: "Red",
