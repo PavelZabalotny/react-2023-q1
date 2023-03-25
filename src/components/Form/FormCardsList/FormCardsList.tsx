@@ -10,6 +10,7 @@ interface IProps {
 const FormCardsList: FC<IProps> = ({ cards }) => (
   <>
     <h2 className={styles.title}>Card List:</h2>
+    {!cards.length && <p>The Card List is empty!</p>}
     <ul className={styles.cards}>
       {cards.map((card) => (
         <FormCard key={card.id} card={card} />
