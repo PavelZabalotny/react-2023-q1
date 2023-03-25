@@ -7,10 +7,9 @@ import { validateAllFields } from "@/shared/utils/validators/validateAllFields";
 import { TInputName } from "@/interfaces/inputName.type";
 import FormSelect from "@/components/Form/FormSelect/FormSelect";
 import { categories } from "@/data/mockCategories";
-import { selectValidation } from "@/shared/utils/validators/selectValidation";
 import { checkboxValidation } from "@/shared/utils/validators/checkboxValidation";
 import FormRadio from "@/components/Form/FormRadio/FormRadio";
-import { radioValidation } from "@/shared/utils/validators/radioValidation";
+import { radioAndSelectValidation } from "@/shared/utils/validators/radioAndSelectValidation";
 import { imageValidation } from "@/shared/utils/validators/imageValidation";
 import { createImage } from "@/shared/utils/createImage";
 import { IFormCard, TCardBorderColor } from "@/pages/Forms/Forms";
@@ -142,11 +141,12 @@ class Form extends Component<IProps, IState> {
     if (title && date && select && checkbox && image) {
       const isTitleValid = () => this.handleValidate("title", title.value, textValidation);
       const isDateValid = () => this.handleValidate("date", date.value, dateValidation);
-      const isSelectValid = () => this.handleValidate("select", select.value, selectValidation);
+      const isSelectValid = () =>
+        this.handleValidate("select", select.value, radioAndSelectValidation);
       const isCheckboxValid = () =>
         this.handleValidate("checkbox", checkbox?.checked.toString(), checkboxValidation);
       const isRadioValid = () =>
-        this.handleValidate("radio", radio?.ref.current?.value ?? "", radioValidation);
+        this.handleValidate("radio", radio?.ref.current?.value ?? "", radioAndSelectValidation);
       const isImageValid = () =>
         this.handleValidate("image", image.files?.length.toString() as string, imageValidation);
 
