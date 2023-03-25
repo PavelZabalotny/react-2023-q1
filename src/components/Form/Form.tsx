@@ -9,6 +9,8 @@ import FormSelect from "@/components/Form/FormSelect/FormSelect";
 import { categories } from "@/data/mockCategories";
 import { selectValidation } from "@/shared/utils/validators/selectValidation";
 import { checkboxValidation } from "@/shared/utils/validators/checkboxValidation";
+import FormRadio from "@/components/Form/FormRadio/FormRadio";
+import { radioValidation } from "@/shared/utils/validators/radioValidation";
 
 interface IState {
   isFormValid: boolean;
@@ -21,6 +23,23 @@ class Form extends Component<PropsWithChildren, IState> {
   private dateRef = React.createRef<HTMLInputElement>();
   private selectRef = React.createRef<HTMLSelectElement>();
   private checkboxRef = React.createRef<HTMLInputElement>();
+  private radioConfig = [
+    {
+      ref: React.createRef<HTMLInputElement>(),
+      label: "Red",
+      defaultValue: "red",
+    },
+    {
+      ref: React.createRef<HTMLInputElement>(),
+      label: "Black",
+      defaultValue: "black",
+    },
+    {
+      ref: React.createRef<HTMLInputElement>(),
+      label: "Blue",
+      defaultValue: "blue",
+    },
+  ];
 
   state = {
     isFormValid: false,
@@ -29,6 +48,7 @@ class Form extends Component<PropsWithChildren, IState> {
       date: false,
       select: false,
       checkbox: false,
+      radio: false,
     },
   };
 
@@ -69,6 +89,12 @@ class Form extends Component<PropsWithChildren, IState> {
           showError={hasError.checkbox}
           errorMessage="Please confirm adding Card to the Card List!"
         />
+        <FormRadio
+          config={this.radioConfig}
+          name="radio"
+          showError={hasError.radio}
+          errorMessage="Choose a radio!"
+        />
 
         <button type="submit">Submit</button>
       </form>
@@ -88,27 +114,36 @@ class Form extends Component<PropsWithChildren, IState> {
 
   private handleFormSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const { current: textInput } = this.textRef;
-    const { current: dateInput } = this.dateRef;
+    const { current: title } = this.textRef;
+    const { current: date } = this.dateRef;
     const { current: select } = this.selectRef;
     const { current: checkbox } = this.checkboxRef;
+    const [radio] = this.radioConfig.filter((radio) => radio.ref.current?.checked);
 
-    if (textInput && dateInput && select && checkbox) {
-      const isTitleValid = () => this.handleValidate("title", textInput.value, textValidation);
-      const isDateValid = () => this.handleValidate("date", dateInput.value, dateValidation);
+    if (title && date && select && checkbox) {
+      const isTitleValid = () => this.handleValidate("title", title.value, textValidation);
+      const isDateValid = () => this.handleValidate("date", date.value, dateValidation);
       const isSelectValid = () => this.handleValidate("select", select.value, selectValidation);
       const isCheckboxValid = () =>
         this.handleValidate("checkbox", checkbox?.checked.toString(), checkboxValidation);
+      const isRadioValid = () =>
+        this.handleValidate("radio", radio?.ref.current?.value ?? "", radioValidation);
 
-      const arrayOfValidateFn = [isTitleValid, isDateValid, isSelectValid, isCheckboxValid];
+      const arrayOfValidateFn = [
+        isTitleValid,
+        isDateValid,
+        isSelectValid,
+        isCheckboxValid,
+        isRadioValid,
+      ];
       const isFormValid = validateAllFields(arrayOfValidateFn);
       if (isFormValid) {
-        console.log("form is valid");
         console.log({
-          title: textInput.value,
-          date: dateInput.value,
+          title: title.value,
+          date: date.value,
           select: select.value,
           checkbox: checkbox?.checked.toString(),
+          radio: radio?.ref.current?.value,
         });
         this.formRef.current?.reset();
       }

@@ -2,7 +2,6 @@ import React, { forwardRef } from "react";
 import FormError from "@/components/Form/FormError/FormError";
 
 interface IProps {
-  ref: React.RefObject<HTMLInputElement>;
   id: string;
   categories: string[];
   label: string;
@@ -16,7 +15,9 @@ const FormSelect: React.ForwardRefExoticComponent<
   <label>
     {label}
     <select id={id} ref={ref}>
-      <option value="">-- Please choose a category --</option>
+      <option defaultValue="" hidden>
+        -- Please choose a category --
+      </option>
       {categories.map((category) => (
         <option key={category} value={category}>
           {category}
