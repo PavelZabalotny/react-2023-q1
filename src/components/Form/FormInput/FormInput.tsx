@@ -5,7 +5,6 @@ import { TInputName } from "@/interfaces/inputName.type";
 
 interface IProps {
   type: "text" | "date" | "checkbox";
-  ref: React.RefObject<HTMLInputElement>;
   id: TInputName;
   label: string;
   showError: boolean;
