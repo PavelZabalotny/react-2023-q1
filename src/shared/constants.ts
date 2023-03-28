@@ -1,6 +1,7 @@
 export enum RoutePaths {
   Home = "/",
   About = "about",
+  Forms = "forms",
   NoMatch = "*",
 }
 

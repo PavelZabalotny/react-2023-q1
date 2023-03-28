@@ -1,22 +1,21 @@
-/// <reference types="vitest" />
 import { defineConfig } from "vitest/config";
-import path from "path";
+import { mergeConfig } from "vite";
+import viteConfig from "./vite.config";
 
-export default defineConfig({
-  test: {
-    css: false,
-    environment: "jsdom",
-    globals: true,
-    setupFiles: "./src/vitestSetup.ts",
-    coverage: {
-      provider: "c8",
-      all: true,
-      reporter: "text",
+export default mergeConfig(
+  viteConfig,
+  defineConfig({
+    test: {
+      css: false,
+      environment: "jsdom",
+      globals: true,
+      setupFiles: "./src/vitestSetup.ts",
+      coverage: {
+        provider: "c8",
+        all: true,
+        reporter: "text",
+        exclude: ["*.config.*", "**/*.d.ts", "src/interfaces/**"],
+      },
     },
-  },
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
-});
+  })
+);

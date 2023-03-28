@@ -1,7 +1,7 @@
 import { expect, test } from "vitest";
 import { render, screen } from "@testing-library/react";
 import Card from "./Card";
-import { IFakeData } from "@/types/fakeData.interface";
+import { IFakeData } from "@/interfaces/fakeData.interface";
 import React from "react";
 
 test("render Card component", () => {
