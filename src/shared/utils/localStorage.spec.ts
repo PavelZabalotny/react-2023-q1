@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { getInputFromLocalStorage, setInputToLocalStorage } from "./localStorage";
+import { getInputFromLocalStorage, saveInputToLocalStorage } from "./localStorage";
 
 const mockKey = "some_key";
 const mockValue = "some_value";
@@ -10,7 +10,7 @@ describe("local storage", () => {
     expect(value).toBeNull();
   });
   test(`get value by existing ${mockKey}`, () => {
-    setInputToLocalStorage(mockKey, mockValue);
+    saveInputToLocalStorage(mockValue);
     const value = getInputFromLocalStorage(mockKey);
     expect(value).toEqual(value);
   });
