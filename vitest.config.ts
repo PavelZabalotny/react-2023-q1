@@ -13,6 +13,7 @@ export default mergeConfig(
       coverage: {
         provider: "c8",
         all: true,
+        skipFull: true,
         reporter: "text",
         exclude: ["*.config.*", "**/*.d.ts", "src/interfaces/**"],
       },
