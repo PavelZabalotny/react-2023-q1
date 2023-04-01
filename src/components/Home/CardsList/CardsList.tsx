@@ -1,12 +1,17 @@
-import React from "react";
+import React, { FC } from "react";
 import Card from "./Card/Card";
 import styles from "./CardsList.module.scss";
-import { fakeData } from "@/data/fakeData";
 
-const CardsList = () => (
+import { IPeople } from "@/interfaces/people.interface";
+
+interface IProps {
+  cards: IPeople[];
+}
+
+const CardsList: FC<IProps> = ({ cards }) => (
   <ul className={styles.cards_list}>
-    {fakeData.map((card) => (
-      <Card key={card.id} props={card} />
+    {cards.map((card) => (
+      <Card key={card.name} card={card} />
     ))}
   </ul>
 );

@@ -1,21 +1,29 @@
-import React, { FormEvent, useEffect, useRef, useState } from "react";
+import React, { FC, FormEvent, useEffect, useRef, useState } from "react";
 import { getInputFromLocalStorage, saveInputToLocalStorage } from "@/shared/utils/localStorage";
-import { LOCALHOST_INPUT_KEY } from "@/shared/constants";
+import { BASE_PEOPLE_URL, LOCALHOST_INPUT_KEY } from "@/shared/constants";
 import styles from "./SearchBar.module.scss";
+import axios from "axios";
+import { IPeople } from "@/interfaces/people.interface";
+import { IPeopleRequest } from "@/interfaces/peopleRequest.interface";
 
-const SearchBar = () => {
-  const [value, setValue] = useState(getInputFromLocalStorage(LOCALHOST_INPUT_KEY) ?? "");
-  const inputValueRef = useRef(value);
+interface IProps {
+  onSubmitCards: (card: IPeople[]) => void;
+}
 
-  function onUnload(): void {
-    saveInputToLocalStorage(inputValueRef.current);
+async function getPeople(search: string, callback: (card: IPeople[]) => void) {
+  try {
+    const response = await axios.get<IPeopleRequest>(`${BASE_PEOPLE_URL}?search=${search}`);
+    callback(response.data.results);
+  } catch (e) {
+    // FIXME: remove error log
+    console.error(e);
   }
+}
 
-  function handleInput(e: FormEvent<HTMLInputElement>): void {
-    const target = e.target as HTMLInputElement;
-    setValue(target.value);
-    inputValueRef.current = target.value;
-  }
+const SearchBar: FC<IProps> = ({ onSubmitCards }) => {
+  const [inputValue, setInputValue] = useState(getInputFromLocalStorage(LOCALHOST_INPUT_KEY));
+  const [searchValue, setSearchValue] = useState(inputValue);
+  const inputValueRef = useRef(inputValue);
 
   useEffect(() => {
     window.addEventListener("beforeunload", onUnload);
@@ -26,20 +34,39 @@ const SearchBar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    getPeople(searchValue, onSubmitCards);
+  }, [searchValue, onSubmitCards]);
+
+  function onUnload(): void {
+    saveInputToLocalStorage(inputValueRef.current);
+  }
+
+  function handleInput(e: FormEvent<HTMLInputElement>): void {
+    const target = e.target as HTMLInputElement;
+    setInputValue(target.value);
+    inputValueRef.current = target.value;
+  }
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
+    e.preventDefault();
+    const target = e.target as HTMLFormElement;
+    setSearchValue(target.searchBar.value);
+  }
+
   return (
-    <div className={styles.search_bar}>
-      <label htmlFor="search_bar">Search:</label>
+    <form className={styles.search_bar} onSubmit={(e) => handleSubmit(e)}>
+      <label htmlFor="searchBar">Search:</label>
       <input
-        id="search_bar"
+        id="searchBar"
         className={styles.search_input}
-        value={value}
+        value={inputValue}
         placeholder="Type to search Cards..."
-        onChange={(event) => {
-          handleInput(event);
-        }}
+        onChange={(event) => handleInput(event)}
       />
-    </div>
+      <button>Submit</button>
+    </form>
   );
 };
 
-export default SearchBar;
+export default React.memo(SearchBar);

@@ -1,20 +1,29 @@
 import React, { FC } from "react";
 import styles from "./Card.module.scss";
-import { IFakeData } from "@/interfaces/fakeData.interface";
+
+import { IPeople } from "@/interfaces/people.interface";
 
 interface IProps {
-  props: IFakeData;
+  card: IPeople;
 }
 
-const Card: FC<IProps> = ({ props: { title, description, image, price } }) => {
+const Card: FC<IProps> = ({ card: { name, birth_year, gender } }) => {
   return (
     <li className={styles.card}>
-      <div className={styles.card__img}>
-        <img src={image} alt={title} />
-      </div>
-      <h3>{title}</h3>
-      <p>{description}</p>
-      <div>{price} USD</div>
+      <ul>
+        <li>
+          <span className={styles.bold}>Name:</span>
+          {name}
+        </li>
+        <li>
+          <span className={styles.bold}>Birth year:</span>
+          {birth_year}
+        </li>
+        <li>
+          <span className={styles.bold}>Gender:</span>
+          {gender}
+        </li>
+      </ul>
     </li>
   );
 };

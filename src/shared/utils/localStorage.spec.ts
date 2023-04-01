@@ -7,7 +7,7 @@ const mockValue = "some_value";
 describe("local storage", () => {
   test(`get value by invalid ${mockKey}`, () => {
     const value = getInputFromLocalStorage(mockKey);
-    expect(value).toBeNull();
+    expect(value).toEqual("");
   });
   test(`get value by existing ${mockKey}`, () => {
     saveInputToLocalStorage(mockValue);
