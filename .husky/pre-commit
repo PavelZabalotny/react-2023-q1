@@ -2,5 +2,5 @@
 . "$(dirname "$0")/_/husky.sh"
 
 npm run test
-npx prettier "**/*" --write --ignore-unknown --cache
+npm run prettier
 npx lint-staged

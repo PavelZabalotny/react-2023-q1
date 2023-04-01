@@ -13,6 +13,7 @@
     "test:coverage": "vitest run --coverage",
     "lint": "eslint --ext .ts,.tsx src/",
     "lint:fix": "eslint --ext .ts,.tsx src/ --fix",
+    "prettier": "npx prettier \"**/*\" --write --ignore-unknown --cache",
     "prepare": "husky install"
   },
   "dependencies": {
