@@ -7,7 +7,7 @@ import { IFormCard } from "@/pages/Forms/Forms";
 const mockOnSubmit: (cards: IFormCard) => void = () => {};
 
 test("render Form component", () => {
-  render(<Form onSubmit={mockOnSubmit} />);
+  render(<Form getCard={mockOnSubmit} />);
   const element = screen.getByRole("button");
   expect(element).toBeInTheDocument();
 });

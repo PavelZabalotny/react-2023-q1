@@ -26,7 +26,7 @@ class Forms extends Component<Record<string, never>, IState> {
   render() {
     return (
       <>
-        <Form onSubmit={(cards: IFormCard) => this.handleFormSubmit(cards)} />
+        <Form getCard={(card: IFormCard) => this.handleFormSubmit(card)} />
         <FormCardsList cards={this.state.cards} />
       </>
     );
