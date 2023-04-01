@@ -3,10 +3,11 @@ import styles from "./Form.module.scss";
 import { categories } from "@/data/mockCategories";
 import { useForm } from "react-hook-form";
 import { createImage } from "@/shared/utils/createImage";
-import { IFormCard, TCardBorderColor } from "@/pages/Forms/Forms";
 import uuid from "react-uuid";
 import FormError from "@/components/Form/FormError/FormError";
 import { RadioConfigInterface } from "@/interfaces/radioConfig.interface";
+import { TCardBorderColor } from "@/interfaces/cardBorderColor.type";
+import { IFormCard } from "@/interfaces/formCard.interface";
 
 const radioConfig: RadioConfigInterface[] = [
   {

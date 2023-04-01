@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import { IFormCard } from "@/pages/Forms/Forms";
 import FormCard from "@/components/Form/FormCardsList/FormCard/FormCard";
 import styles from "./FormCardsList.module.scss";
+import { IFormCard } from "@/interfaces/formCard.interface";
 
 interface IProps {
   cards: IFormCard[];

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { IFormCard } from "@/pages/Forms/Forms";
 import styles from "./FormCard.module.scss";
+import { IFormCard } from "@/interfaces/formCard.interface";
 
 interface IProps {
   card: IFormCard;

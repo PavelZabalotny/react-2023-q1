@@ -1,40 +1,21 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import Form from "@/components/Form/Form";
 import FormCardsList from "@/components/Form/FormCardsList/FormCardsList";
+import { IFormCard } from "@/interfaces/formCard.interface";
 
-export type TCardBorderColor = "red" | "black" | "blue";
+const Forms = () => {
+  const [cards, setCards] = useState<IFormCard[]>([]);
 
-export interface IFormCard {
-  id: string;
-  title: string;
-  date: string;
-  category: string;
-  isCardVisible: boolean;
-  cardBorderColor: TCardBorderColor;
-  img: HTMLImageElement;
-}
-
-export interface IState {
-  cards: IFormCard[];
-}
-
-class Forms extends Component<Record<string, never>, IState> {
-  public state = {
-    cards: [],
-  };
-
-  render() {
-    return (
-      <>
-        <Form getCard={(card: IFormCard) => this.handleFormSubmit(card)} />
-        <FormCardsList cards={this.state.cards} />
-      </>
-    );
+  function handleFormSubmit(card: IFormCard) {
+    setCards((prevState) => [...prevState, card]);
   }
 
-  private handleFormSubmit(card: IFormCard) {
-    this.setState((prevState) => ({ cards: [...prevState.cards, card] }));
-  }
-}
+  return (
+    <>
+      <Form getCard={(card: IFormCard) => handleFormSubmit(card)} />
+      <FormCardsList cards={cards} />
+    </>
+  );
+};
 
 export default Forms;
