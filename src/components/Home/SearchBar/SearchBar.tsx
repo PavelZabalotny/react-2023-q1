@@ -1,23 +1,12 @@
 import React, { FC, FormEvent, useEffect, useRef, useState } from "react";
 import { getInputFromLocalStorage, saveInputToLocalStorage } from "@/shared/utils/localStorage";
-import { BASE_PEOPLE_URL, LOCALHOST_INPUT_KEY } from "@/shared/constants";
+import { LOCALHOST_INPUT_KEY } from "@/shared/constants";
 import styles from "./SearchBar.module.scss";
-import axios from "axios";
 import { IPeople } from "@/interfaces/people.interface";
-import { IPeopleRequest } from "@/interfaces/peopleRequest.interface";
+import { getPeople } from "@/shared/utils/axios/getPeople";
 
 interface IProps {
   onSubmitCards: (card: IPeople[]) => void;
-}
-
-async function getPeople(search: string, callback: (card: IPeople[]) => void) {
-  try {
-    const response = await axios.get<IPeopleRequest>(`${BASE_PEOPLE_URL}?search=${search}`);
-    callback(response.data.results);
-  } catch (e) {
-    // FIXME: remove error log
-    console.error(e);
-  }
 }
 
 const SearchBar: FC<IProps> = ({ onSubmitCards }) => {

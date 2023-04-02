@@ -14,7 +14,6 @@ const CardModal: FC<IProps> = ({
   isShow,
   onClose,
 }) => {
-  console.log("render modal");
   if (!isShow) return null;
 
   const modalContainer = (
