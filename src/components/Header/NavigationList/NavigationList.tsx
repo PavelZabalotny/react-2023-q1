@@ -3,22 +3,17 @@ import { IRouterPath } from "@/interfaces/routerPath.interface";
 import { NavLink } from "react-router-dom";
 import styles from "./NavigationList.module.scss";
 
-interface IPropTypes {
+interface IProps {
   links: IRouterPath[];
-  callback: () => void;
 }
 
-const NavigationList: FC<IPropTypes> = ({ links, callback: updateHeaderPageTitle }) => {
+const NavigationList: FC<IProps> = ({ links }) => {
   return (
     <nav>
       <ul className={styles.navigation_list}>
         {links.map((item) => (
           <li key={item.title}>
-            <NavLink
-              to={item.path}
-              className={({ isActive }) => (isActive ? "active" : "")}
-              onClick={updateHeaderPageTitle}
-            >
+            <NavLink to={item.path} className={({ isActive }) => (isActive ? "active" : "")}>
               {item.title}
             </NavLink>
           </li>

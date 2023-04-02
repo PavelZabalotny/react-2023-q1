@@ -1,24 +1,21 @@
-import React, { Component } from "react";
+import React from "react";
 import styles from "./Header.module.scss";
 import NavigationList from "@/components/Header/NavigationList/NavigationList";
 import { ROUTER_CONFIG } from "@/shared/routerConfig";
 import getPageTitle from "@/shared/utils/getPageTitle";
+import { useLocation } from "react-router-dom";
 
-class Header extends Component {
-  handleNavigationUpdate() {
-    this.forceUpdate();
-  }
+const Header = () => {
+  const location = useLocation();
 
-  render() {
-    return (
-      <header className={styles.header}>
-        <div className={styles.wrapper}>
-          <span className={styles.current_page}>Current Page: {getPageTitle(ROUTER_CONFIG)}</span>
-          <NavigationList links={ROUTER_CONFIG} callback={this.handleNavigationUpdate.bind(this)} />
-        </div>
-      </header>
-    );
-  }
-}
+  return (
+    <header className={styles.header}>
+      <div className={styles.wrapper}>
+        <span className={styles.current_page}>Current Page: {getPageTitle(location.pathname)}</span>
+        <NavigationList links={ROUTER_CONFIG} />
+      </div>
+    </header>
+  );
+};
 
 export default Header;

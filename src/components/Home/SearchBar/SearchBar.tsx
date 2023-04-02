@@ -1,53 +1,45 @@
-import React, { Component, FormEvent } from "react";
-import { getInputFromLocalStorage, setInputToLocalStorage } from "@/shared/utils/localStorage";
+import React, { FormEvent, useEffect, useRef, useState } from "react";
+import { getInputFromLocalStorage, saveInputToLocalStorage } from "@/shared/utils/localStorage";
 import { LOCALHOST_INPUT_KEY } from "@/shared/constants";
 import styles from "./SearchBar.module.scss";
 
-interface IState {
-  value: string;
-}
+const SearchBar = () => {
+  const [value, setValue] = useState(getInputFromLocalStorage(LOCALHOST_INPUT_KEY) ?? "");
+  const inputValueRef = useRef(value);
 
-class SearchBar extends Component<Record<string, never>, IState> {
-  state = { value: getInputFromLocalStorage(LOCALHOST_INPUT_KEY) ?? "" };
+  function onUnload(): void {
+    saveInputToLocalStorage(inputValueRef.current);
+  }
 
-  handleInput(e: FormEvent<HTMLInputElement>) {
+  function handleInput(e: FormEvent<HTMLInputElement>): void {
     const target = e.target as HTMLInputElement;
-    this.setState(() => ({ value: target.value }));
+    setValue(target.value);
+    inputValueRef.current = target.value;
   }
 
-  saveToLocalStorage() {
-    setInputToLocalStorage(LOCALHOST_INPUT_KEY, this.state.value);
-  }
+  useEffect(() => {
+    window.addEventListener("beforeunload", onUnload);
 
-  componentDidMount() {
-    window.addEventListener("beforeunload", () => {
-      this.saveToLocalStorage();
-    });
-  }
+    return () => {
+      onUnload();
+      window.removeEventListener("beforeunload", onUnload);
+    };
+  }, []);
 
-  componentWillUnmount() {
-    this.saveToLocalStorage();
-    window.removeEventListener("beforeunload", () => {
-      this.saveToLocalStorage();
-    });
-  }
-
-  render() {
-    return (
-      <div className={styles.search_bar}>
-        <label htmlFor="search_bar">Search:</label>
-        <input
-          id="search_bar"
-          className={styles.search_input}
-          value={this.state.value}
-          placeholder="Type to search Cards..."
-          onInput={(event) => {
-            this.handleInput(event);
-          }}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div className={styles.search_bar}>
+      <label htmlFor="search_bar">Search:</label>
+      <input
+        id="search_bar"
+        className={styles.search_input}
+        value={value}
+        placeholder="Type to search Cards..."
+        onChange={(event) => {
+          handleInput(event);
+        }}
+      />
+    </div>
+  );
+};
 
 export default SearchBar;

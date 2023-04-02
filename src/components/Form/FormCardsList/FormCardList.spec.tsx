@@ -1,7 +1,7 @@
 import { test } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { IFormCard } from "@/pages/Forms/Forms";
 import FormCardsList from "@/components/Form/FormCardsList/FormCardsList";
+import { IFormCard } from "@/interfaces/formCard.interface";
 
 const imgElement = document.createElement("img");
 

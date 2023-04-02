@@ -1,6 +1,6 @@
-export function createImage(imageElement: HTMLInputElement): HTMLImageElement {
+export function createImage(imageElement: string): HTMLImageElement {
   const img = document.createElement("img");
-  const imageBlob = imageElement.files?.[0] as Blob;
+  const imageBlob = imageElement[0] as unknown as Blob;
   img.src = URL.createObjectURL(imageBlob);
   img.alt = "image";
   /* Release the image */

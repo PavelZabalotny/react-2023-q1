@@ -1,7 +1,9 @@
+import { LOCALHOST_INPUT_KEY } from "@/shared/constants";
+
 export function getInputFromLocalStorage(key: string): string | null {
   return localStorage.getItem(key);
 }
 
-export function setInputToLocalStorage(key: string, value: string): void {
-  localStorage.setItem(key, value);
+export function saveInputToLocalStorage(value: string): void {
+  localStorage.setItem(LOCALHOST_INPUT_KEY, value);
 }
