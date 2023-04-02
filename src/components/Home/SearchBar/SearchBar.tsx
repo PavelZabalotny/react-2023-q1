@@ -58,4 +58,4 @@ const SearchBar: FC<IProps> = ({ onSubmitCards }) => {
   );
 };
 
-export default React.memo(SearchBar);
+export default SearchBar;
