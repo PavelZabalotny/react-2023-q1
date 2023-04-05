@@ -7,9 +7,10 @@ import { getPeople } from "@/shared/utils/axios/getPeople";
 
 interface IProps {
   onSubmitCards: (card: IPeople[]) => void;
+  isLoading: (isLoading: boolean) => void;
 }
 
-const SearchBar: FC<IProps> = ({ onSubmitCards }) => {
+const SearchBar: FC<IProps> = ({ onSubmitCards, isLoading }) => {
   const [inputValue, setInputValue] = useState(getInputFromLocalStorage(LOCALHOST_INPUT_KEY));
   const [searchValue, setSearchValue] = useState(inputValue);
   const inputValueRef = useRef(inputValue);
@@ -24,8 +25,11 @@ const SearchBar: FC<IProps> = ({ onSubmitCards }) => {
   }, []);
 
   useEffect(() => {
-    getPeople(searchValue, onSubmitCards);
-  }, [searchValue, onSubmitCards]);
+    isLoading(true);
+    getPeople(searchValue, onSubmitCards).then(() => {
+      isLoading(false);
+    });
+  }, [searchValue, onSubmitCards, isLoading]);
 
   function onUnload(): void {
     saveInputToLocalStorage(inputValueRef.current);

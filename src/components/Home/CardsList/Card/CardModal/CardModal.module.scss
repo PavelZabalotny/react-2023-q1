@@ -33,6 +33,11 @@
   background: rgb(231, 235, 240);
   border-radius: 0 0 0 5px;
   padding: 10px;
+  transition: 0.2s;
+
+  &:hover {
+    background: red;
+  }
 }
 
 .modal_list {
