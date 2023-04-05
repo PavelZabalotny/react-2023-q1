@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, useEffect, useRef, useState } from "react";
+import React, { FC, FormEvent, useEffect, useState } from "react";
 import { getInputFromLocalStorage, saveInputToLocalStorage } from "@/shared/utils/localStorage";
 import styles from "./SearchBar.module.scss";
 import { IPeople } from "@/interfaces/people.interface";
@@ -12,16 +12,6 @@ interface IProps {
 const SearchBar: FC<IProps> = ({ onSubmitCards, isLoading }) => {
   const [inputValue, setInputValue] = useState(getInputFromLocalStorage());
   const [searchValue, setSearchValue] = useState(inputValue);
-  const inputValueRef = useRef(inputValue);
-
-  useEffect(() => {
-    window.addEventListener("beforeunload", onUnload);
-
-    return () => {
-      onUnload();
-      window.removeEventListener("beforeunload", onUnload);
-    };
-  }, []);
 
   useEffect(() => {
     isLoading(true);
@@ -30,20 +20,17 @@ const SearchBar: FC<IProps> = ({ onSubmitCards, isLoading }) => {
     });
   }, [searchValue, onSubmitCards, isLoading]);
 
-  function onUnload(): void {
-    saveInputToLocalStorage(inputValueRef.current);
-  }
-
   function handleInput(e: FormEvent<HTMLInputElement>): void {
     const target = e.target as HTMLInputElement;
     setInputValue(target.value);
-    inputValueRef.current = target.value;
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
     const target = e.target as HTMLFormElement;
-    setSearchValue(target.searchBar.value);
+    const searchBarValue = target.searchBar.value;
+    saveInputToLocalStorage(searchBarValue);
+    setSearchValue(searchBarValue);
   }
 
   return (
