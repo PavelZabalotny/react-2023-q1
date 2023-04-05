@@ -1,6 +1,5 @@
 import React, { FC, FormEvent, useEffect, useRef, useState } from "react";
 import { getInputFromLocalStorage, saveInputToLocalStorage } from "@/shared/utils/localStorage";
-import { LOCALHOST_INPUT_KEY } from "@/shared/constants";
 import styles from "./SearchBar.module.scss";
 import { IPeople } from "@/interfaces/people.interface";
 import { getPeople } from "@/shared/utils/axios/getPeople";
@@ -11,7 +10,7 @@ interface IProps {
 }
 
 const SearchBar: FC<IProps> = ({ onSubmitCards, isLoading }) => {
-  const [inputValue, setInputValue] = useState(getInputFromLocalStorage(LOCALHOST_INPUT_KEY));
+  const [inputValue, setInputValue] = useState(getInputFromLocalStorage());
   const [searchValue, setSearchValue] = useState(inputValue);
   const inputValueRef = useRef(inputValue);
 
