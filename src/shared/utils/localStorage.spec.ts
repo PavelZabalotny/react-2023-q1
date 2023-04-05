@@ -1,17 +1,16 @@
 import { describe, expect, test } from "vitest";
 import { getInputFromLocalStorage, saveInputToLocalStorage } from "./localStorage";
 
-const mockKey = "some_key";
 const mockValue = "some_value";
 
 describe("local storage", () => {
-  test(`get value by invalid ${mockKey}`, () => {
-    const value = getInputFromLocalStorage(mockKey);
+  test(`get empty value`, () => {
+    const value = getInputFromLocalStorage();
     expect(value).toEqual("");
   });
-  test(`get value by existing ${mockKey}`, () => {
+  test(`get mock value`, () => {
     saveInputToLocalStorage(mockValue);
-    const value = getInputFromLocalStorage(mockKey);
-    expect(value).toEqual(value);
+    const value = getInputFromLocalStorage();
+    expect(value).toEqual(mockValue);
   });
 });
