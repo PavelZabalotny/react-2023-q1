@@ -2,7 +2,7 @@ import React, { FC, FormEvent, useEffect, useState } from "react";
 import { getInputFromLocalStorage, saveInputToLocalStorage } from "@/shared/utils/localStorage";
 import styles from "./SearchBar.module.scss";
 import { IPeople } from "@/interfaces/people.interface";
-import { getPeople } from "@/shared/utils/axios/getPeople";
+import { fetchPeople } from "@/shared/utils/peopleService/fetchPeople";
 
 interface IProps {
   onSubmitCards: (card: IPeople[]) => void;
@@ -15,9 +15,17 @@ const SearchBar: FC<IProps> = ({ onSubmitCards, isLoading }) => {
 
   useEffect(() => {
     isLoading(true);
-    getPeople(searchValue, onSubmitCards).then(() => {
-      isLoading(false);
-    });
+
+    fetchPeople(searchValue)
+      .then((people) => {
+        onSubmitCards(people);
+      })
+      .catch((error: Error) => {
+        console.error(error.message);
+      })
+      .finally(() => {
+        isLoading(false);
+      });
   }, [searchValue, onSubmitCards, isLoading]);
 
   function handleInput(e: FormEvent<HTMLInputElement>): void {
