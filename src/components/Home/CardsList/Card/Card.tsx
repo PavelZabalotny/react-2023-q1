@@ -1,21 +1,44 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import styles from "./Card.module.scss";
-import { IFakeData } from "@/interfaces/fakeData.interface";
+
+import { IPeople } from "@/interfaces/people.interface";
+import CardModal from "@/components/Home/CardsList/Card/CardModal/CardModal";
 
 interface IProps {
-  props: IFakeData;
+  card: IPeople;
 }
 
-const Card: FC<IProps> = ({ props: { title, description, image, price } }) => {
+const Card: FC<IProps> = ({ card }) => {
+  const [showModal, setShowModal] = useState(false);
+
+  function handleClick(): void {
+    setShowModal(true);
+  }
+
+  function closeModal(): void {
+    setShowModal(false);
+  }
+
   return (
-    <li className={styles.card}>
-      <div className={styles.card__img}>
-        <img src={image} alt={title} />
-      </div>
-      <h3>{title}</h3>
-      <p>{description}</p>
-      <div>{price} USD</div>
-    </li>
+    <>
+      <li className={styles.card} onClick={handleClick}>
+        <ul>
+          <li>
+            <span className={styles.bold}>Name:</span>
+            {card.name}
+          </li>
+          <li>
+            <span className={styles.bold}>Birth year:</span>
+            {card.birth_year}
+          </li>
+          <li>
+            <span className={styles.bold}>Gender:</span>
+            {card.gender}
+          </li>
+        </ul>
+      </li>
+      <CardModal card={card} isShow={showModal} onClose={() => closeModal()} />
+    </>
   );
 };
 

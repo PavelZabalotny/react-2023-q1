@@ -2,7 +2,16 @@
   list-style: none;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
   margin: 0;
   padding: 0 0 2rem 0;
+}
+
+.title {
+  text-align: center;
+}
+
+.empty {
+  color: red;
 }

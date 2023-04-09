@@ -6,6 +6,10 @@ body,
   height: 100%;
 }
 
+body {
+  background: rgb(231, 235, 240);
+}
+
 #root {
   display: flex;
   flex-direction: column;

@@ -6,5 +6,5 @@ import { expect } from "vitest";
 test("render Home component", () => {
   render(<Home />);
   const element = screen.getByRole("textbox");
-  expect(element).toHaveAttribute("id", "search_bar");
+  expect(element).toHaveAttribute("id", "searchBar");
 });

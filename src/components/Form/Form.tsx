@@ -11,17 +11,14 @@ import { IFormCard } from "@/interfaces/formCard.interface";
 
 const radioConfig: RadioConfigInterface[] = [
   {
-    ref: React.createRef<HTMLInputElement>(),
     label: "Red",
     defaultValue: "red",
   },
   {
-    ref: React.createRef<HTMLInputElement>(),
     label: "Black",
     defaultValue: "black",
   },
   {
-    ref: React.createRef<HTMLInputElement>(),
     label: "Blue",
     defaultValue: "blue",
   },

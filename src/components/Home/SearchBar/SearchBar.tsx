@@ -1,44 +1,58 @@
-import React, { FormEvent, useEffect, useRef, useState } from "react";
+import React, { FC, FormEvent, useEffect, useState } from "react";
 import { getInputFromLocalStorage, saveInputToLocalStorage } from "@/shared/utils/localStorage";
-import { LOCALHOST_INPUT_KEY } from "@/shared/constants";
 import styles from "./SearchBar.module.scss";
+import { IPeople } from "@/interfaces/people.interface";
+import { fetchPeople } from "@/shared/utils/peopleService/fetchPeople";
 
-const SearchBar = () => {
-  const [value, setValue] = useState(getInputFromLocalStorage(LOCALHOST_INPUT_KEY) ?? "");
-  const inputValueRef = useRef(value);
+interface IProps {
+  onSubmitCards: (card: IPeople[]) => void;
+  isLoading: (isLoading: boolean) => void;
+}
 
-  function onUnload(): void {
-    saveInputToLocalStorage(inputValueRef.current);
-  }
+const SearchBar: FC<IProps> = ({ onSubmitCards, isLoading }) => {
+  const [inputValue, setInputValue] = useState(getInputFromLocalStorage());
+  const [searchValue, setSearchValue] = useState(inputValue);
+
+  useEffect(() => {
+    isLoading(true);
+
+    fetchPeople(searchValue)
+      .then((people) => {
+        onSubmitCards(people);
+      })
+      .catch((error: Error) => {
+        console.error(error.message);
+      })
+      .finally(() => {
+        isLoading(false);
+      });
+  }, [searchValue, onSubmitCards, isLoading]);
 
   function handleInput(e: FormEvent<HTMLInputElement>): void {
     const target = e.target as HTMLInputElement;
-    setValue(target.value);
-    inputValueRef.current = target.value;
+    setInputValue(target.value);
   }
 
-  useEffect(() => {
-    window.addEventListener("beforeunload", onUnload);
-
-    return () => {
-      onUnload();
-      window.removeEventListener("beforeunload", onUnload);
-    };
-  }, []);
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
+    e.preventDefault();
+    const target = e.target as HTMLFormElement;
+    const searchBarValue = target.searchBar.value;
+    saveInputToLocalStorage(searchBarValue);
+    setSearchValue(searchBarValue);
+  }
 
   return (
-    <div className={styles.search_bar}>
-      <label htmlFor="search_bar">Search:</label>
+    <form className={styles.search_bar} onSubmit={(e) => handleSubmit(e)}>
+      <label htmlFor="searchBar">Search:</label>
       <input
-        id="search_bar"
+        id="searchBar"
         className={styles.search_input}
-        value={value}
+        value={inputValue}
         placeholder="Type to search Cards..."
-        onChange={(event) => {
-          handleInput(event);
-        }}
+        onChange={(event) => handleInput(event)}
       />
-    </div>
+      <button>Submit</button>
+    </form>
   );
 };
 

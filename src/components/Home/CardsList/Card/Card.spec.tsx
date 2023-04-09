@@ -1,13 +1,23 @@
 import { expect, test } from "vitest";
 import { render, screen } from "@testing-library/react";
 import Card from "./Card";
-import { IFakeData } from "@/interfaces/fakeData.interface";
 import React from "react";
 
+import { IPeople } from "@/interfaces/people.interface";
+
+const mockCard: IPeople = {
+  name: "Pavel555",
+  birth_year: "1999",
+  gender: "male",
+  eye_color: "red",
+  hair_color: "black",
+  height: "188",
+  mass: "75",
+  skin_color: "brown",
+};
+
 test("render Card component", () => {
-  const title = "card title";
-  const cardProps: IFakeData = { id: "1", title, description: "", image: "", price: "" };
-  render(<Card props={cardProps} />);
-  const element = screen.getByRole("heading", { level: 3 });
+  render(<Card card={mockCard} />);
+  const element = screen.getByText("Pavel555");
   expect(element).toBeInTheDocument();
 });
