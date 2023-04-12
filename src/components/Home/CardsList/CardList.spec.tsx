@@ -4,6 +4,9 @@ import CardsList from "./CardsList";
 import React from "react";
 
 import { IPeople } from "@/interfaces/people.interface";
+import configureStore from "redux-mock-store";
+import { Middleware } from "@reduxjs/toolkit";
+import { Provider } from "react-redux";
 
 const mockCard: IPeople[] = [
   {
@@ -18,8 +21,22 @@ const mockCard: IPeople[] = [
   },
 ];
 
+const middlewares: Middleware[] = [];
+const mockStore = configureStore(middlewares);
+
 test("render CardList component", () => {
-  render(<CardsList cards={mockCard} />);
+  const initialState = {
+    searchText: {
+      isLoading: false,
+    },
+  };
+  const store = mockStore(initialState);
+
+  render(
+    <Provider store={store}>
+      <CardsList cards={mockCard} />
+    </Provider>
+  );
   const element = screen.getByText("Pavel555");
   expect(element).toBeInTheDocument();
 });

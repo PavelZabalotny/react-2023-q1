@@ -3,14 +3,20 @@ import Card from "./Card/Card";
 import styles from "./CardsList.module.scss";
 
 import { IPeople } from "@/interfaces/people.interface";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import CardLoading from "@/components/Home/CardsList/Card/CardLoading/CardLoading";
 
 interface IProps {
   cards: IPeople[];
 }
 
 const CardsList: FC<IProps> = ({ cards }) => {
+  const { isLoading } = useSelector((state: RootState) => state.searchText);
   const emptyElement = <h3 className={styles.empty}>No result of searching!</h3>;
-  return (
+  return isLoading ? (
+    <CardLoading />
+  ) : (
     <>
       <h3 className={styles.title}>Characters within the Star Wars universe</h3>
       <ul className={styles.cards_list}>

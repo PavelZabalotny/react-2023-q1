@@ -1,22 +1,23 @@
-import React, { FC, FormEvent, useEffect, useState } from "react";
-import { getInputFromLocalStorage, saveInputToLocalStorage } from "@/shared/utils/localStorage";
+import React, { FC, FormEvent, useCallback, useEffect, useState } from "react";
 import styles from "./SearchBar.module.scss";
 import { IPeople } from "@/interfaces/people.interface";
 import { fetchPeople } from "@/shared/utils/peopleService/fetchPeople";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { add, isLoading } from "@/features/searchText/searchTextSlice";
 
 interface IProps {
   onSubmitCards: (card: IPeople[]) => void;
-  isLoading: (isLoading: boolean) => void;
 }
 
-const SearchBar: FC<IProps> = ({ onSubmitCards, isLoading }) => {
-  const [inputValue, setInputValue] = useState(getInputFromLocalStorage());
-  const [searchValue, setSearchValue] = useState(inputValue);
-
-  useEffect(() => {
-    isLoading(true);
-
-    fetchPeople(searchValue)
+const SearchBar: FC<IProps> = ({ onSubmitCards }) => {
+  const { value: stateValue } = useSelector((state: RootState) => state.searchText);
+  const dispatch = useDispatch();
+  const [inputValue, setInputValue] = useState(stateValue);
+  const memoizedGetCards = useCallback(() => {
+    dispatch(isLoading(true));
+    // TODO: use RTK Query
+    fetchPeople(stateValue)
       .then((people) => {
         onSubmitCards(people);
       })
@@ -24,9 +25,13 @@ const SearchBar: FC<IProps> = ({ onSubmitCards, isLoading }) => {
         console.error(error.message);
       })
       .finally(() => {
-        isLoading(false);
+        dispatch(isLoading(false));
       });
-  }, [searchValue, onSubmitCards, isLoading]);
+  }, [dispatch, onSubmitCards, stateValue]);
+
+  useEffect(() => {
+    memoizedGetCards();
+  }, [memoizedGetCards, stateValue]);
 
   function handleInput(e: FormEvent<HTMLInputElement>): void {
     const target = e.target as HTMLInputElement;
@@ -36,9 +41,9 @@ const SearchBar: FC<IProps> = ({ onSubmitCards, isLoading }) => {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
     const target = e.target as HTMLFormElement;
-    const searchBarValue = target.searchBar.value;
-    saveInputToLocalStorage(searchBarValue);
-    setSearchValue(searchBarValue);
+    const searchBarValue: string = target.searchBar.value;
+    dispatch(add(searchBarValue));
+    // getCards();
   }
 
   return (
@@ -46,6 +51,7 @@ const SearchBar: FC<IProps> = ({ onSubmitCards, isLoading }) => {
       <label htmlFor="searchBar">Search:</label>
       <input
         id="searchBar"
+        type="text"
         className={styles.search_input}
         value={inputValue}
         placeholder="Type to search Cards..."
