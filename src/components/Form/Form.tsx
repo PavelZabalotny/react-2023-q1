@@ -1,13 +1,14 @@
-import React, { FC } from "react";
+import React from "react";
 import styles from "./Form.module.scss";
 import { categories } from "@/data/mockCategories";
 import { useForm } from "react-hook-form";
-import { createImage } from "@/shared/utils/createImage";
 import uuid from "react-uuid";
 import FormError from "@/components/Form/FormError/FormError";
 import { RadioConfigInterface } from "@/interfaces/radioConfig.interface";
 import { TCardBorderColor } from "@/interfaces/cardBorderColor.type";
 import { IFormCard } from "@/interfaces/formCard.interface";
+import { useDispatch } from "react-redux";
+import { addFormCard } from "@/features/formCards/formCardsSlice";
 
 const radioConfig: RadioConfigInterface[] = [
   {
@@ -30,7 +31,7 @@ export interface IForm {
   category: string;
   isCardVisible: boolean;
   cardBorderColor: string;
-  img: string;
+  img: FileList;
 }
 
 const registerOptions = {
@@ -58,35 +59,36 @@ const registerOptions = {
   },
 };
 
-interface IProps {
-  getCard: (card: IFormCard) => void;
-}
-
-const Form: FC<IProps> = ({ getCard }) => {
+const Form = () => {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
     reset,
   } = useForm<IForm>({ mode: "onSubmit" });
+  const dispatch = useDispatch();
 
   function formSubmit(data: IForm) {
     if (isValid) {
-      const userImage = createImage(data.img);
-      const card: IFormCard = {
-        id: uuid(),
-        title: data.title,
-        date: data.date,
-        category: data.category,
-        isCardVisible: data.isCardVisible,
-        cardBorderColor: data.cardBorderColor as TCardBorderColor,
-        img: userImage,
+      const file = data.img[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        const card: IFormCard = {
+          id: uuid(),
+          title: data.title,
+          date: data.date,
+          category: data.category,
+          isCardVisible: data.isCardVisible,
+          cardBorderColor: data.cardBorderColor as TCardBorderColor,
+          img: reader.result as string,
+        };
+        const confirmSaveData = confirm("The data has been saved!");
+        if (confirmSaveData) {
+          dispatch(addFormCard(card));
+        }
+        reset();
       };
-      const confirmSaveData = confirm("The data has been saved!");
-      if (confirmSaveData) {
-        getCard(card);
-      }
-      reset();
     }
   }
 

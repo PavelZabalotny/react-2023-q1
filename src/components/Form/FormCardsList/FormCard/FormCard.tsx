@@ -24,7 +24,7 @@ const FormCard: FC<IProps> = ({ card: { title, date, img, category, cardBorderCo
   return (
     <li className={cardClasses}>
       <div>
-        <img src={img.src} alt={img.alt} />
+        <img src={img} alt={title} />
       </div>
       <h3>Title: {title}</h3>
       <div>Date: {date}</div>
