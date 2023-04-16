@@ -1,33 +1,15 @@
 import { test } from "vitest";
 import { render, screen } from "@testing-library/react";
 import FormCardsList from "@/components/Form/FormCardsList/FormCardsList";
-import { IFormCard } from "@/interfaces/formCard.interface";
-
-const imgElement = document.createElement("img");
-
-const mockCards: IFormCard[] = [
-  {
-    id: "516684a1sd6asd6",
-    cardBorderColor: "blue",
-    date: "2023-03-25",
-    title: "card title",
-    category: "artCategory",
-    isCardVisible: true,
-    img: imgElement,
-  },
-  {
-    id: "sad1f6sa4g6df",
-    cardBorderColor: "red",
-    date: "2023-03-21",
-    title: "my custom title",
-    category: "anyCategory",
-    isCardVisible: true,
-    img: imgElement,
-  },
-];
+import { Provider } from "react-redux";
+import { store } from "@/store/store";
 
 test("render FormCard component", () => {
-  render(<FormCardsList cards={mockCards} />);
-  const element = screen.getByText(/2023-03-21/i);
+  render(
+    <Provider store={store}>
+      <FormCardsList />
+    </Provider>
+  );
+  const element = screen.getByText(/The Card List is empty/i);
   expect(element).toBeInTheDocument();
 });

@@ -2,24 +2,15 @@ import { expect, test } from "vitest";
 import { render, screen } from "@testing-library/react";
 import CardsList from "./CardsList";
 import React from "react";
+import { Provider } from "react-redux";
+import { store } from "@/store/store";
 
-import { IPeople } from "@/interfaces/people.interface";
-
-const mockCard: IPeople[] = [
-  {
-    name: "Pavel555",
-    birth_year: "1999",
-    gender: "male",
-    eye_color: "red",
-    hair_color: "black",
-    height: "188",
-    mass: "75",
-    skin_color: "brown",
-  },
-];
-
-test("render CardList component", () => {
-  render(<CardsList cards={mockCard} />);
-  const element = screen.getByText("Pavel555");
+test("render CardList component", async () => {
+  render(
+    <Provider store={store}>
+      <CardsList />
+    </Provider>
+  );
+  const element = screen.getByAltText(/loading/i);
   expect(element).toBeInTheDocument();
 });

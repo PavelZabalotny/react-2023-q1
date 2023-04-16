@@ -7,5 +7,5 @@ export interface IFormCard {
   category: string;
   isCardVisible: boolean;
   cardBorderColor: TCardBorderColor;
-  img: HTMLImageElement;
+  img: string;
 }
